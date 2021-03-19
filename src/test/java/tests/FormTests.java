@@ -18,39 +18,52 @@ public class FormTests {
 
     @Test
     void successFullFillTest() {
+        // test data
+        String firstName = "testFirstName";
+        String lastName = "testLastName";
+        String userEmail = "testemail@test.com";
+        String userNumber = "1234567890";
+        String subjectItem = "History";
+        String fileName = "testImage.png";
+        String address = "testCurrentAddress";
+        String state = "NCR";
+        String city = "Delhi";
+
+        //open page
         open("https://demoqa.com/automation-practice-form");
 
-        $("#firstName").setValue("testFirstName");
-        $("#lastName").setValue("testLastName");
-        $("#userEmail").setValue("testemail@test.com");
+        // fill fields on page
+        $("#firstName").setValue(firstName);
+        $("#lastName").setValue(lastName);
+        $("#userEmail").setValue(userEmail);
         $("[for='gender-radio-1']").click();
-        $("#userNumber").setValue("1234567890");
+        $("#userNumber").setValue(userNumber);
         $("#dateOfBirthInput").click();
         $(".react-datepicker__month-select").selectOption("May");
         $(".react-datepicker__year-select").selectOption("2019");
         $("[aria-label='Choose Tuesday, May 7th, 2019']").click();
-        $("#subjectsInput").setValue("History").pressEnter();
+        $("#subjectsInput").setValue(subjectItem).pressEnter();
         $("[for='hobbies-checkbox-1']").click();
-        $("#uploadPicture").uploadFromClasspath("testImage.png");
-        $("#currentAddress").setValue("testCurrentAddress");
-        $("#react-select-3-input").setValue("NCR").pressEnter();
-        $("#react-select-4-input").setValue("Delhi").pressEnter();
+        $("#uploadPicture").uploadFromClasspath(fileName);
+        $("#currentAddress").setValue(address);
+        $("#react-select-3-input").setValue(state).pressEnter();
+        $("#react-select-4-input").setValue(city).pressEnter();
         $("#submit").click();
 
-        $(".modal-body").shouldHave(text("testFirstName"),
-                text("testLastName"),
-                text("testemail@test.com"),
+        //check modal
+        $(".modal-body").shouldHave(text(firstName),
+                text(lastName),
+                text(userEmail),
                 text("Male"),
-                text("1234567890"),
+                text(userNumber),
                 text("7 May,2019"),
-                text("History"),
+                text(subjectItem),
                 text("Sports"),
-                text("testImage.png"),
-                text("testCurrentAddress"),
-                text("NCR"),
-                text("Delhi"));
+                text(fileName),
+                text(address),
+                text(state),
+                text(city));
 
-        $("#closeLargeModal").click();
 
     }
 }
